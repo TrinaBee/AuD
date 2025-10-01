@@ -46,7 +46,7 @@ class Liste:
     def __len__(self) -> int:  # rekusiv - Mit len von Klasse Wagon Hinweg
         if self.first is None:
             return 0
-        return len(self.first,0)
+        return len(self.first)
 
 
 class Wagon:
@@ -61,4 +61,12 @@ class Wagon:
     #         return len(self.next) + 1
 
     def __len__(self) -> int: # Vorwärts
-      #bearbeiten
+      def len_wagon_rekusiv(wagon:Wagon, counter):
+          if wagon.next is None:
+              return counter + 1
+          else:
+              return len_wagon_rekusiv(wagon.next, counter + 1)
+      if self.next is None:
+          return 1
+      else:
+          return len_wagon_rekusiv(self.next, 1)
