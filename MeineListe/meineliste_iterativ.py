@@ -8,7 +8,7 @@ class Liste:
     def __str__(self):
         return "[]"
 
-    def append(self, value:Any) -> None:
+    def append(self, value: Any) -> None:
         if self.first is None:
             self.first = Wagon(value)
         else:
@@ -24,12 +24,18 @@ class Liste:
             schaffner = self.first
             counter = 1
             while schaffner.next is not None:
+                schaffner = schaffner.next
                 counter += 1
             return counter
+
 
 class Wagon:
     def __init__(self, value):
         self.next = None
         self.value = value
 
-
+    def __len__(self) -> int:
+        if self.next is None:
+            return 1
+        else:
+            return len(self.next) + 1
