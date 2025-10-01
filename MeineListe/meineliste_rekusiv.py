@@ -60,7 +60,7 @@ class Wagon:
     #     else:
     #         return len(self.next) + 1
 
-    def __len__(self, counter) -> int: # Vorwärts
+    def __len__(self) -> int: # Vorwärts
         if self.next is None:
             return counter
         else:
