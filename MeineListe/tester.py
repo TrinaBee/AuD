@@ -28,18 +28,19 @@ liste_meine_r.append(1)
 assert len(liste_meine_i) == len(liste_python), "nicht gleich lang"
 assert len(liste_meine_r) == len(liste_python), "nicht gleich lang"
 
-# for i in range(4):
-#     liste_python.append(i)
-#     liste_meine_i.append(i)
-#     liste_meine_r.append(i)
+for i in range(4):
+    liste_python.append(i)
+    liste_meine_i.append(i)
+    liste_meine_r.append(i)
 
-for elem in [1,"str",True,0.1,]:
-    liste_python.append(elem)
-    liste_meine_i.append(elem)
-    liste_meine_r.append(elem)
+# for elem in [1,"str",True,0.1,]:
+#     liste_python.append(elem)
+#     liste_meine_i.append(elem)
+#     liste_meine_r.append(elem)
 
 print(len(liste_python))
 print(len(liste_meine_i))
 print(len(liste_meine_r))
 
 print(liste_meine_r)
+print(liste_meine_i)

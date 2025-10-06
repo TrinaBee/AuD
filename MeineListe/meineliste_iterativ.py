@@ -7,6 +7,12 @@ class Liste:
             self.next = None
             self.value = value
 
+        def __repr__(self):
+            if self.next is None:
+                return f'{repr(self.value)}'
+            else:
+                return f'{repr(self.value)}, {repr(self.next)}'
+
         def __len__(self) -> int:
             if self.next is None:
                 return 1
@@ -17,7 +23,14 @@ class Liste:
         self._first = None
 
     def __str__(self):
-        return "[]"
+        if self._first is None:
+            return "[]"
+        ergebnis = repr(self._first)
+        schaffner = self._first
+        while schaffner.next is not None:
+            schaffner = schaffner.next
+            ergebnis += f", {repr(schaffner)}"
+        return f"[{ergebnis}]"
 
     def append(self, value: Any) -> None:
         if self._first is None:
