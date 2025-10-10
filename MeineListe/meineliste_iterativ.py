@@ -25,12 +25,18 @@ class Liste:
     def __str__(self):
         if self._first is None:
             return "[]"
-        ergebnis = repr(self._first)
+        ergebnis = "["
+
         schaffner = self._first
-        while schaffner.next is not None:
+        while schaffner is not None:
+            ergebnis += repr(schaffner.value)
+            if schaffner.next is not None:
+                ergebnis += ", "
             schaffner = schaffner.next
-            ergebnis += f", {repr(schaffner)}"
-        return f"[{ergebnis}]"
+
+        ergebnis += "]"
+        return ergebnis
+
 
     def append(self, value: Any) -> None:
         if self._first is None:
@@ -51,6 +57,18 @@ class Liste:
                 schaffner = schaffner.next
                 counter += 1
             return counter
+
+    def copy(self):
+        kopie = Liste()
+        if self._first is None:
+            return kopie
+        else:
+            schaffner = self._first
+            kopie.append(schaffner.value)
+            while schaffner.next is not None:
+                schaffner = schaffner.next
+                kopie.append(schaffner.value)
+            return kopie
 
 
 

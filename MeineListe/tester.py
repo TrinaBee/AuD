@@ -37,10 +37,17 @@ for i in range(4):
 #     liste_python.append(elem)
 #     liste_meine_i.append(elem)
 #     liste_meine_r.append(elem)
-
+print('----------Länge(py,i,r)----------')
 print(len(liste_python))
 print(len(liste_meine_i))
 print(len(liste_meine_r))
 
-print(liste_meine_r)
+print('----------Listen(i,r)----------')
 print(liste_meine_i)
+print(liste_meine_r)
+
+kopie_liste_i = liste_meine_i.copy()
+kopie_liste_r = liste_meine_r.copy()
+print('----------Kopie(i,r)----------')
+print(kopie_liste_i)
+print(kopie_liste_r)

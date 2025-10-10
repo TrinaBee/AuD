@@ -21,11 +21,16 @@ class Liste:
                 return 1
             return len(self.next) + 1
 
-        def append(self, value: Any):
+        def _append(self, value: Any):
             if self.next is None:
                 self.next = Liste._Wagon(value)
             else:
-                self.next.append(value)
+                self.next._append(value)
+        def _copy(self):
+            wagon_kopie = Liste._Wagon(self.value)
+            if self.next is not None:
+                wagon_kopie.next = self.next._copy()
+            return wagon_kopie
     def __init__(self):
         self._first = None
 
@@ -44,7 +49,13 @@ class Liste:
         if self._first is None:
             self._first = self._Wagon(value)
         else:
-            self._first.append(value)
+            self._first._append(value)
+
+    def copy(self):
+        kopie = Liste()
+        if self._first is not None:
+            kopie._first = self._first._copy()
+        return kopie
 
 
 
