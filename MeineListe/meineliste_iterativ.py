@@ -70,5 +70,20 @@ class Liste:
                 kopie.append(schaffner.value)
             return kopie
 
+    def __getitem__(self, index: int) -> Any:
+        if self._first is None or index < 0 or index >= len(self):
+            # return "IndexError: list index out of range"
+            raise IndexError("list index out of range")
+        else:
+            schaffner = self._first
+            counter = 0
+            while schaffner.next:
+                if index == counter:
+                    return schaffner.value
+                else:
+                    schaffner = schaffner.next
+                    counter += 1
+
+
 
 

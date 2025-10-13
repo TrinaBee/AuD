@@ -31,6 +31,12 @@ class Liste:
             if self.next is not None:
                 wagon_kopie.next = self.next._copy()
             return wagon_kopie
+
+        def __getitem__(self, index: int) -> Any:
+            if index == 0:
+                return self.value
+            return self.next.__getitem__(index-1)
+
     def __init__(self):
         self._first = None
 
@@ -56,6 +62,12 @@ class Liste:
         if self._first is not None:
             kopie._first = self._first._copy()
         return kopie
+
+    def __getitem__(self, index: int) -> Any:
+        if self._first is None or index < 0 or index >= len(self):
+            raise IndexError("list index out of range")
+        else:
+            return self._first.__getitem__(index)
 
 
 

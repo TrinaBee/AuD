@@ -51,3 +51,9 @@ kopie_liste_r = liste_meine_r.copy()
 print('----------Kopie(i,r)----------')
 print(kopie_liste_i)
 print(kopie_liste_r)
+
+test_liste = list()
+
+# print(test_liste[0])
+print(liste_meine_i[0])
+print(liste_meine_r[0])
