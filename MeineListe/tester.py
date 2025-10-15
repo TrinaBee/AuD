@@ -55,5 +55,8 @@ print(kopie_liste_r)
 test_liste = list()
 
 # print(test_liste[0])
-print(liste_meine_i[0])
-print(liste_meine_r[0])
+print(liste_meine_i[4])
+print(liste_meine_r[4])
+
+for elem in liste_meine_i:
+    print(elem)

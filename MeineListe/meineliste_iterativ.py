@@ -19,6 +19,17 @@ class Liste:
             else:
                 return len(self.next) + 1
 
+    class _Iterator:
+        def __init__(self, first: Any):
+            self.temp = first
+
+        def __next__(self) -> Any:
+            if self.temp is not None:
+                v = self.temp.value
+                self.temp = self.temp.next
+                return v
+            raise StopIteration
+
     def __init__(self):
         self._first = None
 
@@ -70,19 +81,22 @@ class Liste:
                 kopie.append(schaffner.value)
             return kopie
 
-    def __getitem__(self, index: int) -> Any:
-        if self._first is None or index < 0 or index >= len(self):
-            # return "IndexError: list index out of range"
+    def __getitem__(self, index: int):
+        if self._first is None or index < 0:
             raise IndexError("list index out of range")
-        else:
-            schaffner = self._first
-            counter = 0
-            while schaffner.next:
-                if index == counter:
-                    return schaffner.value
-                else:
-                    schaffner = schaffner.next
-                    counter += 1
+        if type(index) is not int:
+            raise TypeError("index must be integer")
+        schaffner = self._first
+        counter = 0
+        while schaffner is not None:
+            if index == counter:
+                return schaffner.value
+            schaffner = schaffner.next
+            counter += 1
+        raise IndexError("list index out of range")
+
+    def __iter__(self):
+        return self._Iterator(self._first)
 
 
 

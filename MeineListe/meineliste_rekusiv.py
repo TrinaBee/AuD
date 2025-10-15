@@ -21,18 +21,19 @@ class Liste:
                 return 1
             return len(self.next) + 1
 
-        def _append(self, value: Any):
+        def append(self, value: Any):
             if self.next is None:
                 self.next = Liste._Wagon(value)
             else:
-                self.next._append(value)
-        def _copy(self):
+                self.next.append(value)
+
+        def copy(self):
             wagon_kopie = Liste._Wagon(self.value)
             if self.next is not None:
-                wagon_kopie.next = self.next._copy()
+                wagon_kopie.next = self.next.copy()
             return wagon_kopie
 
-        def __getitem__(self, index: int) -> Any:
+        def __getitem__(self, index: int):
             if index == 0:
                 return self.value
             return self.next.__getitem__(index-1)
@@ -55,19 +56,20 @@ class Liste:
         if self._first is None:
             self._first = self._Wagon(value)
         else:
-            self._first._append(value)
+            self._first.append(value)
 
     def copy(self):
         kopie = Liste()
         if self._first is not None:
-            kopie._first = self._first._copy()
+            kopie._first = self._first.copy()
         return kopie
 
-    def __getitem__(self, index: int) -> Any:
+    def __getitem__(self, index: int):
         if self._first is None or index < 0 or index >= len(self):
             raise IndexError("list index out of range")
-        else:
-            return self._first.__getitem__(index)
+        if type(index) is not int:
+            raise TypeError("index must be integer")
+        return self._first.__getitem__(index)
 
 
 
