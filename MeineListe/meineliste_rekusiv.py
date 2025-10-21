@@ -5,6 +5,17 @@ from typing import Any
 
 
 class Liste:
+    class _Iterator:
+        def __init__(self, first: Any):
+            self.temp = first
+
+        def __next__(self) -> Any:
+            if self.temp is not None:
+                v = self.temp.value
+                self.temp = self.temp.next
+                return v
+            raise StopIteration
+
     class _Wagon:
         def __init__(self, value: Any):
             self.next = None
@@ -21,6 +32,11 @@ class Liste:
                 return 1
             return len(self.next) + 1
 
+        def __getitem__(self, index: int):
+            if index == 0:
+                return self.value
+            return self.next.__getitem__(index-1)
+
         def append(self, value: Any):
             if self.next is None:
                 self.next = Liste._Wagon(value)
@@ -33,20 +49,17 @@ class Liste:
                 wagon_kopie.next = self.next.copy()
             return wagon_kopie
 
-        def __getitem__(self, index: int):
-            if index == 0:
-                return self.value
-            return self.next.__getitem__(index-1)
-    class _Iterator:
-        def __init__(self, first: Any):
-            self.temp = first
+        def unique(self):
+            aktueller_wagon = self
+            while aktueller_wagon.next is not None:
+                if aktueller_wagon.next.value == self.value:
+                    aktueller_wagon.next = aktueller_wagon.next.next
+                else:
+                    aktueller_wagon = aktueller_wagon.next
+            if self.next is not None:
+                self.next.unique()
+            return self
 
-        def __next__(self) -> Any:
-            if self.temp is not None:
-                v = self.temp.value
-                self.temp = self.temp.next
-                return v
-            raise StopIteration
 
     def __init__(self):
         self._first = None
@@ -62,6 +75,16 @@ class Liste:
             return 0
         return len(self._first)
 
+    def __getitem__(self, index: int):
+        if self._first is None or index < 0 or index >= len(self):
+            raise IndexError("list index out of range")
+        if type(index) is not int:
+            raise TypeError("index must be integer")
+        return self._first.__getitem__(index)
+
+    def __iter__(self):
+        return self._Iterator(self._first)
+
     def append(self, value: Any):
         if self._first is None:
             self._first = self._Wagon(value)
@@ -74,15 +97,10 @@ class Liste:
             kopie._first = self._first.copy()
         return kopie
 
-    def __getitem__(self, index: int):
-        if self._first is None or index < 0 or index >= len(self):
-            raise IndexError("list index out of range")
-        if type(index) is not int:
-            raise TypeError("index must be integer")
-        return self._first.__getitem__(index)
-
-    def __iter__(self):
-        return self._Iterator(self._first)
+    def unique(self):
+        if self._first is not None:
+            self._first.unique()
+        return self
 
 
 
