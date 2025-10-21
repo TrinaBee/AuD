@@ -52,11 +52,17 @@ print('----------Kopie(i,r)----------')
 print(kopie_liste_i)
 print(kopie_liste_r)
 
-test_liste = list()
 
-# print(test_liste[0])
 print(liste_meine_i[4])
 print(liste_meine_r[4])
 
-for elem in liste_meine_i:
-    print(elem)
+# for elem in liste_meine_i:
+#     print(elem)
+print('----------Unique1 i)----------')
+print(kopie_liste_i)
+unique1 = kopie_liste_i.unique1()
+print(unique1)
+print('----------Unique2 i)----------')
+print(kopie_liste_i)
+unique2 = kopie_liste_i.unique2()
+print(unique2)

@@ -98,6 +98,43 @@ class Liste:
     def __iter__(self):
         return self._Iterator(self._first)
 
+    def unique1(self):
+        u_liste = Liste()
+        schaffner_original = self._first
+        while schaffner_original is not None:   #Schaffner rennt durch die orignale Liste
+            vorhanden = False
+            schaffner_u_liste = u_liste._first
+            while schaffner_u_liste is not None:    #Schaffner unique Liste rennt so lange durch die neue Liste bis er durch die neue Liste
+                if schaffner_u_liste.value == schaffner_original.value: #vergleicht die values
+                    vorhanden = True
+                    break
+                else:
+                    schaffner_u_liste = schaffner_u_liste.next
+            if vorhanden is False:
+                u_liste.append(schaffner_original.value)
+
+            schaffner_original = schaffner_original.next
+
+        return u_liste
+
+
+    def unique2(self):
+        schaffner = self._first
+
+        while schaffner is not None:
+            vorgaenger = schaffner
+            kontroletti = schaffner.next
+            while kontroletti is not None:
+                nachfolger = kontroletti.next
+                if kontroletti.value == schaffner.value:
+                    vorgaenger.next = nachfolger
+                else:
+                    vorgaenger = kontroletti
+                kontroletti = nachfolger
+            schaffner = schaffner.next
+        return self
+
+
 
 
 

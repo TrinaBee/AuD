@@ -37,6 +37,16 @@ class Liste:
             if index == 0:
                 return self.value
             return self.next.__getitem__(index-1)
+    class _Iterator:
+        def __init__(self, first: Any):
+            self.temp = first
+
+        def __next__(self) -> Any:
+            if self.temp is not None:
+                v = self.temp.value
+                self.temp = self.temp.next
+                return v
+            raise StopIteration
 
     def __init__(self):
         self._first = None
@@ -70,6 +80,11 @@ class Liste:
         if type(index) is not int:
             raise TypeError("index must be integer")
         return self._first.__getitem__(index)
+
+    def __iter__(self):
+        return self._Iterator(self._first)
+
+
 
 
 
