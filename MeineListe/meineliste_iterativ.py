@@ -99,6 +99,7 @@ class Liste:
         return self._Iterator(self._first)
 
     def unique1(self):
+        '''unique mit neuer Liste'''
         u_liste = Liste()
         schaffner_original = self._first
         while schaffner_original is not None:   #Schaffner rennt durch die orignale Liste
@@ -119,6 +120,7 @@ class Liste:
 
 
     def unique2(self):
+        '''unique mit Änderung im Original'''
         schaffner = self._first
 
         while schaffner is not None:
