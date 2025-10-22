@@ -1,5 +1,5 @@
 from typing import Any
-
+import time
 
 class Liste:
     class _Wagon:
@@ -19,16 +19,6 @@ class Liste:
             else:
                 return len(self.next) + 1
 
-    class _Iterator:
-        def __init__(self, first: Any):
-            self.temp = first
-
-        def __next__(self) -> Any:
-            if self.temp is not None:
-                v = self.temp.value
-                self.temp = self.temp.next
-                return v
-            raise StopIteration
 
     def __init__(self):
         self._first = None
@@ -96,22 +86,25 @@ class Liste:
         raise IndexError("list index out of range")
 
     def __iter__(self):
-        return self._Iterator(self._first)
+        wagon = self._first
+        while wagon is not None:
+            yield wagon.value
+            wagon = wagon.next
 
     def unique1(self):
         '''unique mit neuer Liste'''
         u_liste = Liste()
         schaffner_original = self._first
-        while schaffner_original is not None:   #Schaffner rennt durch die orignale Liste
+        while schaffner_original is not None:
             vorhanden = False
             schaffner_u_liste = u_liste._first
-            while schaffner_u_liste is not None:    #Schaffner unique Liste rennt so lange durch die neue Liste bis er durch die neue Liste
-                if schaffner_u_liste.value == schaffner_original.value: #vergleicht die values
+            while schaffner_u_liste is not None:
+                if schaffner_u_liste.value == schaffner_original.value:
                     vorhanden = True
                     break
                 else:
                     schaffner_u_liste = schaffner_u_liste.next
-            if vorhanden is False:
+            if not vorhanden:
                 u_liste.append(schaffner_original.value)
 
             schaffner_original = schaffner_original.next
@@ -134,7 +127,8 @@ class Liste:
                     vorgaenger = kontroletti
                 kontroletti = nachfolger
             schaffner = schaffner.next
-        return self
+        return
+
 
 
 

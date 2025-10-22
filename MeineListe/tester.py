@@ -70,3 +70,13 @@ print('----------Unique r)----------')
 print(kopie_liste_r)
 unique = kopie_liste_r.unique()
 print(unique)
+
+test = ListeI()
+for i in range(10):
+    test.append(1)
+print(test)
+test.unique2()
+print(test)
+
+
+
