@@ -146,11 +146,16 @@ class Liste:
         laenge = len(self)
         swapped = True
         while swapped:
+            schaffner = self._first
             swapped = False
             for i in range(laenge - 1):
-                if self[i] > self[i + 1]:
-                    self[i], self[i + 1] = self[i + 1], self[i]
-                    swapped = True
+                try:
+                    if schaffner.value > schaffner.next.value:
+                        schaffner.value, schaffner.next.value = schaffner.next.value, schaffner.value
+                        swapped = True
+                    schaffner = schaffner.next
+                except AttributeError:
+                    pass
                 if i == laenge-1:
                     laenge -= 1
 

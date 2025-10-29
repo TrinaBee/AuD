@@ -96,7 +96,7 @@ print(time.time()-start)
 
 print('----------bubble-sort----------')
 sliste = ListeI()
-for i in range(20):
+for i in range(50):
     sliste.append(randint(1,100))
 
 print(sliste)
