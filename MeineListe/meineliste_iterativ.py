@@ -159,6 +159,32 @@ class Liste:
                 if i == laenge-1:
                     laenge -= 1
 
+    def bubble_sort_nl(self):
+       if self._first is None:
+           return Liste()
+
+       nl = Liste()
+       schaffner = self._first
+
+       while schaffner is not None:
+           wagon = self._Wagon(schaffner.value)
+
+           if nl._first is None or wagon.value < nl._first.value:
+               wagon.next = nl._first
+               nl._first = wagon
+           else:
+
+               kontroletti = nl._first
+               while kontroletti.next is not None and kontroletti.next.value <= wagon.value:
+                   kontroletti = kontroletti.next
+
+
+               wagon.next = kontroletti.next
+               kontroletti.next = wagon
+
+           schaffner = schaffner.next
+
+       return nl
 
 
 

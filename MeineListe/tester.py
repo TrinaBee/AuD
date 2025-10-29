@@ -96,9 +96,13 @@ print(time.time()-start)
 
 print('----------bubble-sort----------')
 sliste = ListeI()
-for i in range(50):
+for i in range(20):
     sliste.append(randint(1,100))
-
+nlsliste = sliste.copy()
 print(sliste)
 sliste.bubble_sort()
+print(sliste)
+print('----------bubble-sort-nl---------')
+print(nlsliste)
+print(nlsliste.bubble_sort_nl())
 print(sliste)
