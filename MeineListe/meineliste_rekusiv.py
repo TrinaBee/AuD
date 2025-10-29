@@ -49,16 +49,16 @@ class Liste:
                 wagon_kopie.next = self.next.copy()
             return wagon_kopie
 
-        def unique(self):
-            aktueller_wagon = self
-            while aktueller_wagon.next is not None:
-                if aktueller_wagon.next.value == self.value:
-                    aktueller_wagon.next = aktueller_wagon.next.next
-                else:
-                    aktueller_wagon = aktueller_wagon.next
-            if self.next is not None:
-                self.next.unique()
-            return self
+        # def unique(self):
+        #     aktueller_wagon = self
+        #     while aktueller_wagon.next is not None:
+        #         if aktueller_wagon.next.value == self.value:
+        #             aktueller_wagon.next = aktueller_wagon.next.next
+        #         else:
+        #             aktueller_wagon = aktueller_wagon.next
+        #     if self.next is not None:
+        #         self.next.unique()
+        #     return self
 
 
     def __init__(self):
@@ -97,10 +97,50 @@ class Liste:
             kopie._first = self._first.copy()
         return kopie
 
-    def unique(self):
-        if self._first is not None:
-            self._first.unique()
-        return self
+    # def unique(self):
+    #     if self._first is not None:
+    #         self._first.unique()
+    #     return self
+
+    # unique aber iterativ, da rekusiv Quatsch wäre
+    def unique1(self):
+        '''unique mit neuer Liste'''
+        u_liste = Liste()
+        schaffner_original = self._first
+        while schaffner_original is not None:
+            vorhanden = False
+            schaffner_u_liste = u_liste._first
+            while schaffner_u_liste is not None:
+                if schaffner_u_liste.value == schaffner_original.value:
+                    vorhanden = True
+                    break
+                else:
+                    schaffner_u_liste = schaffner_u_liste.next
+            if not vorhanden:
+                u_liste.append(schaffner_original.value)
+
+            schaffner_original = schaffner_original.next
+
+        return u_liste
+
+
+    def unique2(self):
+        '''unique mit Änderung im Original'''
+        schaffner = self._first
+
+        while schaffner is not None:
+            vorgaenger = schaffner
+            kontroletti = schaffner.next
+            while kontroletti is not None:
+                nachfolger = kontroletti.next
+                if kontroletti.value == schaffner.value:
+                    vorgaenger.next = nachfolger
+                else:
+                    vorgaenger = kontroletti
+                kontroletti = nachfolger
+            schaffner = schaffner.next
+        return
+
 
 
 

@@ -1,5 +1,7 @@
 from meineliste_iterativ import Liste as ListeI
 from meineliste_rekusiv import Liste as ListeR
+import time
+from random import randint
 
 liste_meine_i = ListeI()
 liste_meine_r = ListeR()
@@ -68,15 +70,35 @@ unique2 = kopie_liste_i.unique2()
 print(unique2)
 print('----------Unique r)----------')
 print(kopie_liste_r)
-unique = kopie_liste_r.unique()
+unique = kopie_liste_r.unique1()
 print(unique)
 
 test = ListeI()
-for i in range(10):
-    test.append(1)
+for i in range(100):
+    test.append(i)
 print(test)
 test.unique2()
 print(test)
 
+print('----------in----------')
 
+start = time.time()
+print('78',78 in test)
+print(time.time()-start)
 
+start = time.time()
+print('16',16 in test)
+print(time.time()-start)
+
+start = time.time()
+print('103',103 in test)
+print(time.time()-start)
+
+print('----------bubble-sort----------')
+sliste = ListeI()
+for i in range(20):
+    sliste.append(randint(1,100))
+
+print(sliste)
+sliste.bubble_sort()
+print(sliste)

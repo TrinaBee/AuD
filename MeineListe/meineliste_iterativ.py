@@ -38,16 +38,6 @@ class Liste:
         ergebnis += "]"
         return ergebnis
 
-
-    def append(self, value: Any) -> None:
-        if self._first is None:
-            self._first = self._Wagon(value)
-        else:
-            schaffner = self._first
-            while schaffner.next is not None:
-                schaffner = schaffner.next
-            schaffner.next = self._Wagon(value)
-
     def __len__(self) -> int:
         if self._first is None:
             return 0
@@ -58,18 +48,6 @@ class Liste:
                 schaffner = schaffner.next
                 counter += 1
             return counter
-
-    def copy(self):
-        kopie = Liste()
-        if self._first is None:
-            return kopie
-        else:
-            schaffner = self._first
-            kopie.append(schaffner.value)
-            while schaffner.next is not None:
-                schaffner = schaffner.next
-                kopie.append(schaffner.value)
-            return kopie
 
     def __getitem__(self, index: int):
         if self._first is None or index < 0:
@@ -86,10 +64,46 @@ class Liste:
         raise IndexError("list index out of range")
 
     def __iter__(self):
+        # Generator-Methode, wegen dem yield, bei jedem yield hält die Methode an und liefert den Wert zurück
         wagon = self._first
         while wagon is not None:
             yield wagon.value
             wagon = wagon.next
+
+    def __contains__(self, item):
+        # wagon = self._first
+        # while wagon is not None:
+        #     if wagon.value == item:
+        #         return True
+        #     wagon = wagon.next
+        # return False
+        for elem in self:
+            if elem == item:
+                return True
+        return False
+
+
+
+    def append(self, value: Any) -> None:
+        if self._first is None:
+            self._first = self._Wagon(value)
+        else:
+            schaffner = self._first
+            while schaffner.next is not None:
+                schaffner = schaffner.next
+            schaffner.next = self._Wagon(value)
+
+    def copy(self):
+        kopie = Liste()
+        if self._first is None:
+            return kopie
+        else:
+            schaffner = self._first
+            kopie.append(schaffner.value)
+            while schaffner.next is not None:
+                schaffner = schaffner.next
+                kopie.append(schaffner.value)
+            return kopie
 
     def unique1(self):
         '''unique mit neuer Liste'''
@@ -111,7 +125,6 @@ class Liste:
 
         return u_liste
 
-
     def unique2(self):
         '''unique mit Änderung im Original'''
         schaffner = self._first
@@ -129,6 +142,17 @@ class Liste:
             schaffner = schaffner.next
         return
 
+    def bubble_sort(self):
+        laenge = len(self)
+        swapped = True
+        while swapped:
+            swapped = False
+            for i in range(laenge - 1):
+                if self[i] > self[i + 1]:
+                    self[i], self[i + 1] = self[i + 1], self[i]
+                    swapped = True
+                if i == laenge-1:
+                    laenge -= 1
 
 
 
