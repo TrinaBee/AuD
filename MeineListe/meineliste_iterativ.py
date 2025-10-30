@@ -143,6 +143,7 @@ class Liste:
         return
 
     def bubble_sort(self):
+        '''Bubble Sort in Originaler Liste'''
         laenge = len(self)
         swapped = True
         while swapped:
@@ -159,10 +160,14 @@ class Liste:
                 if i == laenge-1:
                     laenge -= 1
 
-    def bubble_sort_nl(self):
-       if self._first is None:
-           return Liste()
+    def bubble_sort_nl1(self):
+        '''Bubble Sort mit Kopie der Originalen Liste'''
+        nl = self
+        nl.bubble_sort()
+        return nl
 
+    def bubble_sort_nl2(self):
+       '''Bubble Sort zwischen Origingaler und neuer Liste'''
        nl = Liste()
        schaffner = self._first
 
